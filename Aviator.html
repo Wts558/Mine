@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal Bot</title>
+  <style>
+    body {
+      background-color: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .counter {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .signal-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    .signal-button:hover {
+      background-color: #45a049;
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    .range {
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="counter">Генерация сигнала...</div>
+    <div class="info">
+      <button class="signal-button" id="signalButton">Получить сигнал</button>
+    </div>
+    <div class="info">
+      <div>Диапазон: <span class="range" id="range">0.00 - 0.00</span></div>
+    </div>
+  </div>
+
+  <script>
+    let rangeElem = document.getElementById('range');
+    let signalButton = document.getElementById('signalButton');
+
+    // Функция для генерации случайного диапазона
+    function generateRandomRange() {
+      // Рандомизируем вероятность для чисел, близких к 0
+      const randomValue = Math.random();
+      let minRange, maxRange;
+
+      if (randomValue < 0.6) {
+        // Диапазоны с более низкими значениями (часто)
+        minRange = (Math.random() * 2) + 1.00; // от 1.00 до 3.00
+        maxRange = minRange + (Math.random() * 1.5) + 0.50; // разница от 0.50 до 2.00
+      } else if (randomValue < 0.9) {
+        // Средние диапазоны
+        minRange = (Math.random() * 5) + 5.00; // от 5.00 до 10.00
+        maxRange = minRange + (Math.random() * 2.5) + 0.50; // разница до 2.5
+      } else {
+        // Более высокие диапазоны (редко)
+        minRange = (Math.random() * 15) + 10.00; // от 10.00 до 25.00
+        maxRange = minRange + (Math.random() * 2.5) + 0.50; // разница до 2.5
+      }
+
+      // Отображаем диапазон на экране
+      rangeElem.textContent = `${minRange.toFixed(2)} - ${maxRange.toFixed(2)}`;
+    }
+
+    // Обработчик для кнопки "Получить сигнал"
+    signalButton.addEventListener('click', () => {
+      generateRandomRange();
+    });
+  </script>
+
+</body>
+</html>
